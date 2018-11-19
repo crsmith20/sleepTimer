@@ -1,11 +1,29 @@
 import os, subprocess, time
+import tkinter as tk
 
-def main():
-	# time.sleep(4500)
-	time.sleep(3600)
-	p = subprocess.Popen([r"C:\Users\Chris\Desktop\sleep.cmd"])
-	p.communicate()
+class ExampleApp(tk.Tk):
+    def __init__(self):
+        tk.Tk.__init__(self)
+        self.label = tk.Label(self, text="", width=10)
+        self.label.pack()
+        self.remaining = 0
+        self.countdown(60)
 
-if __name__ == '__main__':
-	main()
-	
+    def countdown(self, remaining = None):
+        if remaining is not None:
+            self.remaining = remaining
+
+        if self.remaining <= 0:
+            self.label.configure(text="time's up!")
+            p = subprocess.Popen([r"C:\Users\Chris Master Race\Desktop\sleep.cmd"])
+            p.communicate()
+            return
+
+        else:
+            self.label.configure(text="%d" % self.remaining)
+            self.remaining = self.remaining - 1
+            self.after(1000, self.countdown)
+
+if __name__ == "__main__":
+    app = ExampleApp()
+    app.mainloop()
