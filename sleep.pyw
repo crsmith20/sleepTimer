@@ -14,6 +14,7 @@ class SleepApp(tk.Tk):
             self.remaining = remaining
         if self.remaining <= 0:
             self.label.configure(text="Good Night!")
+            # Replace "User" with your actual user or just change location
             p = subprocess.Popen([r"C:\Users\User\Desktop\sleep.cmd"])
             p.communicate()
             return
